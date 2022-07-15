@@ -1,0 +1,13 @@
+<html>
+<head>
+    <title>Welcome to my website</title>
+</head>
+<body>
+    <h1> Welcome to my website </h1>
+    {% for post in posts%}
+    <hr>{{post.title}} By {{post.slug}} in {{post.pub_date}}<hr> <hr>{{post.body}}<hr>
+    
+    {% endfor %}
+    <h3>nowly time is : {{now}}</h3>
+</body>
+</html>
