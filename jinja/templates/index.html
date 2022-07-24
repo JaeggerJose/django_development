@@ -1,0 +1,12 @@
+<html>
+<head>
+</head>
+
+<body>
+    ${name}
+    <%!
+        from django.conf import settings
+    %>
+    ${settings.TEMPLATES[0]['DIRS'][0]}
+    </body>
+</html>

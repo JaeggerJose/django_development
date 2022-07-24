@@ -1,0 +1,53 @@
+{% load static %}
+{% load myfilter %}
+<html>
+    <head>
+    </head>
+    <body>
+        add : {{ count|add:50 }}
+        <br>
+        time: {{time|date:"d-m-Y H-i-s"}}
+        <br>
+        cut: {{ cut_str|cut:'-'}}
+        <br>
+        catfirst: {{first_big|capfirst}}
+        <br>
+        default: {{result|default:"empty"}}
+        <br>
+        default_ifnone: {{ifnow|default_if_none:"nowly empty"}}
+        <br>
+        dictsort: {{dict_list|dictsort:"age"}}
+        <br>
+        dictsort: {{dict_list|last}}
+        <br>
+        floatforamt: {{float_num|floatformat:3 }}
+        <br>
+        join: {{array|join:"-" }}
+        <br>
+        length:{{dict_list|length }}
+        <br>
+        iflength: {{dict_list|length_is:3}}
+        <br>
+        divisibleby: {{ count|divisibleby:10 }}
+        <br>
+        safe: {{html_str|safe}}
+        <br>
+        ramdom: {{dict_list|random}}
+        <br>
+        slice: {{html_str|slice:7}}
+        <br>
+        slug: {{ html_str|slugify}}
+        <br>
+        upper: {{html_str|upper}}
+        <br>
+        lower: {{html_str|lower}}
+        <br>
+        urlize: {{url_str|urlize}}
+        <br>
+        timeuntil: {{ feature|timeuntil}}
+        <br>
+        wordcount: {{first_big|wordcount}}
+        <br>
+        test: {{ count|test_filter:10 }}
+    </body>
+</html>

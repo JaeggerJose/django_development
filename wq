@@ -1,0 +1,48 @@
+[33mcommit f7334b35ebc7bb12cdb6cc5e6917f0a356422b1c[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: JaeggerJose <90586932+JaeggerJose@users.noreply.github.com>
+Date:   Tue Jul 19 16:08:28 2022 +0800
+
+    Create mako_rewriting_render.py
+
+[33mcommit c75ebcb4c15c59a9025d1e217f1bec622266b297[m
+Author: lms025187 <lms025187@gmail.com>
+Date:   Fri Jul 15 00:02:50 2022 -0700
+
+    add html
+
+[33mcommit 5440a462ca5c1d06430cee115829fe095d2ee4e5[m
+Merge: 315475d f5660f9
+Author: lms025187 <lms025187@gmail.com>
+Date:   Thu Jul 14 23:23:38 2022 -0700
+
+    Merge branch 'main' of github.com:JaeggerJose/django_development into main
+
+[33mcommit 315475da4b7f090bc3309671ad47341db5093431[m
+Author: lms025187 <lms025187@gmail.com>
+Date:   Thu Jul 14 23:23:23 2022 -0700
+
+    computer failed, thus need to commit in order to commit the file
+
+[33mcommit f5660f94d4b6ed4f17ac4f4b38e18a76f3ff8cfa[m
+Author: JaeggerJose <90586932+JaeggerJose@users.noreply.github.com>
+Date:   Fri Jul 15 13:33:15 2022 +0800
+
+    Delete lession4/.idea directory
+
+[33mcommit 7848938a91e905427d6b88e58805b3b3417b4ce2[m
+Author: lms025187 <lms025187@gmail.com>
+Date:   Thu Jul 14 22:32:47 2022 -0700
+
+    guide using book
+
+[33mcommit baa39e20f00eb3768ba3771e45a982c23390df74[m
+Author: lms025187 <lms025187@gmail.com>
+Date:   Thu Jul 14 22:04:57 2022 -0700
+
+    start developing django framework
+
+[33mcommit 17c735af1ca5f4b8f64c357218f54b0f671cdacf[m
+Author: JaeggerJose <90586932+JaeggerJose@users.noreply.github.com>
+Date:   Fri Jul 15 12:59:54 2022 +0800
+
+    Initial commit

@@ -1,0 +1,14 @@
+{% load myfilter %}
+
+<html>
+    <head> 
+        <title> </title>
+    </head>
+    <body>
+        {% if error %}
+            <h4> error: {{ error }} </h4>
+        {% else %}
+            <span style="color: {{ message_type.color}}"> {{ message|deep_check_message }} </span>
+        {% endif %}
+        </body>
+</html>
