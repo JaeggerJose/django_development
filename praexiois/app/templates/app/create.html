@@ -1,3 +1,4 @@
+{% load static %}
 <html>
     <head>
         <title>Praexisio Astaxy UI Web</title>
@@ -5,10 +6,11 @@
 
     <body>
         <div class="bg" style="border:2px purple solid;font-size:13px;background-color:purple;">
-            <img src="cropped-logo.png" alt="company icon">
-            <a href="creatanewtask.html"><button>Create a new task</button></a>
+            <img src="{% static 'croppedlogo.png' %}" alt="company icon">
+            <a href="{% url 'app:create' %}"><button>Create a new task</button></a>
             <a href="presonality.html"><button>Personalität</button></a>
             <a href="logout.html"><button>Log out</button></a>
+            <a href="{% url 'app:index' %}"><button>[Home]</button></a>
             <form action="{% url 'app:create_active' %}" method="post">
                 {% csrf_token %} 
                 <fieldset>
