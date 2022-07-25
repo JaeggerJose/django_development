@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>Praexisio Astaxy UI Web</title>
+    </head>
+
+    <body>
+        <div class="bg" style="border:2px purple solid;font-size:13px;background-color:purple;">
+            <img src="cropped-logo.png" alt="company icon">
+            <a href="creatanewtask.html"><button>Create a new task</button></a>
+            <a href="presonality.html"><button>Personalität</button></a>
+            <a href="logout.html"><button>Log out</button></a>
+            <form action="{% url 'app:create_active' %}" method="post">
+                {% csrf_token %} 
+                <fieldset>
+                <input type="submit" value='submit'>Submit</button>
+                </fieldset>
+            </form>
+        </div>
+    </body>
+</html>

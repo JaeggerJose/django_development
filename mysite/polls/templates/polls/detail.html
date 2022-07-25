@@ -7,7 +7,7 @@
             <legend><h1>{{ question.question_text }}</h1></legend>
             {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
             {% for choice in question.choice_set.all %}
-                <input type="radio" name="xxx" id="choice{{ forloop.counter }}" value="1">
+                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{choice.id}}">
                 <!--This is input is use POST method to send informations to the polls.vote views and the 
                     the informations is value="{{ choice.id }} e.g.: 1, 2, 3-->
                 <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>

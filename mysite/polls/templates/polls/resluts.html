@@ -7,4 +7,4 @@
 {% endfor %}
 </ul>
 
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+<button type="button" onclick="location.href='{% url 'polls:detail' question.id %}'" style="width:120px;height:40px;font-size:20px;">Vote again?</button>
