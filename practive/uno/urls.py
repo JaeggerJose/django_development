@@ -1,6 +1,5 @@
-import imp
 from django.urls import path
-from .views import Message
+from uno import views as user_view
 urlpatterns = [
-    path('message/<str:message_type>', Message.as_view()),
+    path('uno/', user_view.UsersView.as_view()),
 ]

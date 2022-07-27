@@ -1,22 +1,27 @@
-from django.shortcuts import render
-from django.views.generic import View
-from .consts import MessagesType
-# Create your views here.
+from django.http import JsonResponse
+from django.db import transaction
+from rest_framework.generics import GenericAPIView
+from .serializers import UserSerializer 
+from .models import User
 
-class Message(View):
-   def get(self, request, message_type):
-      data = {}
+class UsersView(GenericAPIView):
+   queryset = User.objects.all()
+   serializer_class = UserSerializer
+   
+   def get(self, request, *args, **krgs):
+      users = self.get_queryset()
+      serializer = self.serializer_class(users, many=True)
+      data = serializer.data
+      return JsonResponse(data, safe=False)
+   
+   def post(self, request, *args, **krgs):
+      data = request.data
       try:
-         message_type_obj = MessagesType[message_type]
-      except:
-         data['error'] = 'didnt have this message'
-         render(request, 'message.html', data)
-      
-      message = request.GET.get('message','') #message in () means the message in url
-      if not message:      #execute when the (?message=''), (?) or (?abc)...etc.
-         data['error'] = 'text cannot be empty'
-         return render(request, 'message.html', data)
-      
-      data['message'] = message
-      data['message_type'] = message_type_obj
-      return render(request, 'message.html', data)
+         serializer = self.serializer_class(data=data)
+         serializer.is_valid(raise_exception=True)
+         with transaction.atomic():
+            serializer.save()
+         data = serializer.data
+      except Exception as e:
+         data = {'error': str(e)}
+      return JsonResponse(data)

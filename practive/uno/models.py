@@ -1,8 +1,8 @@
-from xml.dom.pulldom import default_bufsize
 from django.db import models
 
 # Create your models here.
 
-class Test(models.Model):
+class User(models.Model):
     name = models.CharField(max_length=20)
-    age = models.IntegerField(default=0)
+    id = models.AutoField(auto_created=True, primary_key=True)
+    email = models.EmailField(unique=True)
