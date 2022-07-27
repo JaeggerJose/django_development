@@ -5,6 +5,7 @@
     </head>
 
     <body>
+        {% csrf_token %} 
         <div class="bg" style="border:2px purple solid;font-size:13px;background-color:purple;">
             <img src="{% static 'croppedlogo.png' %}" alt="company icon">
             <a href="{% url 'app:create' %}"><button>Create a new task</button></a>

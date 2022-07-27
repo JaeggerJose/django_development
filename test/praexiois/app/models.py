@@ -8,7 +8,7 @@ class User(models.Model):
     id = models.AutoField(auto_created=True, primary_key=True)
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
-    telephone = PhoneNumberField(blank=True)
+    telephone = PhoneNumberField(unique=True, blank=True)
     def __str__(self):  #make the information rendering on the admin website
         return self.name
     
@@ -17,7 +17,7 @@ class Job(models.Model):
     #reference to the object User and when it was deleted this Job under the User will be deleted too
     jobid = models.IntegerField(unique=True, null=True)
     def __str__(self):              # __unicode__ on Python 2
-        return self.jobid #make the information rendering on the admin website
+        return str(self.jobid) #make the information rendering on the admin website
     
 class JobDetail(models.Model):
     jobdetail = models.ForeignKey(Job, on_delete=models.CASCADE, null=True)
