@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 import time, os, random
+from datetime import datetime
 
 # Darunter ist für Djangorestframework import library
 from .serializers import UserSerializer, JobSerializer
@@ -18,21 +19,33 @@ def create(request):
     return render(request, 'app/create.html')
 
 def create_active(request):
-    name  = random.randint(100,999)
-    f = open('/home/minghsuan/Desktop/Job_queue/job.sh','w+')
+    #device Variable
+    mem_num = 1
+    cpus_per_task = 1
+    ntasks_num = 8
+    #path Variable
+    format_datetime = "%Y%m%d%H%M%S"
+    name  = (datetime.now().strftime(format_datetime)) + str(random.randint(100,999))
+    fopen_file = '/home/minghsuan/Desktop/Job_queue/job{}.sh'.format(name)
+    mv_file = 'mv /home/minghsuan/Desktop/Job_queue/job{}.sh /home/minghsuan/Desktop/Job_finished'.format(name)
+    sbatch_file = 'sbtach /home/minghsuan/Desktop/Job_finished/job{}.sh'.format(name)
+
+    #file produce and execute
+    f = open(fopen_file,'w+')
     f.write("#!/bin/bash\n")
-    f.write("#SBATCH --job-name=$jobName\n")
-    f.write("#SBATCH --ntasks={}\n".format(8))
-    f.write("#SBATCH --cpus-per-task=\n")
-    f.write("#SBATCH --mem=1gb\n")
-    f.write("#SBATCH --output=/tmp/output.log\n")
+    f.write("#SBATCH --job-name=job{}\n".format(name))
+    f.write("#SBATCH --ntasks={}\n".format(ntasks_num))
+    f.write("#SBATCH --cpus-per-task={}\n".format(cpus_per_task))
+    f.write("#SBATCH --mem={}gb\n".format(mem_num))
+    f.write("#SBATCH --output=/tmp/output{}.log\n".format(name))
     f.write("#SBATCH --partition=COMPUTE1Q\n")
     f.write("#SBATCH --account=root\n" )
     f.write("echo '1'\n")
     f.close()
-    time.sleep(3)
-    os.system('mv /home/minghsuan/Desktop/Job_queue/job.sh /home/minghsuan/Desktop/Job_finished')
-    os.system('sbtach /home/minghsuan/Desktop/Job_finished/job.sh')
+    time.sleep(3) ## in order to prevent sending before that sbatch-file produced
+    os.system(mv_file)
+    os.system(sbatch_file)
+
     return HttpResponseRedirect(reverse('app:index')) #The reverse var. is names of path from urls.py
 
 
