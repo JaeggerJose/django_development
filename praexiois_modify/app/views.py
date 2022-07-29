@@ -28,7 +28,7 @@ def create_active(request):
     name  = (datetime.now().strftime(format_datetime)) + str(random.randint(100,999))
     fopen_file = '/home/minghsuan/Desktop/Job_queue/job{}.sh'.format(name)
     mv_file = 'mv /home/minghsuan/Desktop/Job_queue/job{}.sh /home/minghsuan/Desktop/Job_finished'.format(name)
-    sbatch_file = 'sbtach /home/minghsuan/Desktop/Job_finished/job{}.sh'.format(name)
+    sbatch_file = 'sbatch /home/minghsuan/Desktop/Job_finished/job{}.sh'.format(name)
 
     #file produce and execute
     f = open(fopen_file,'w+')
@@ -37,13 +37,14 @@ def create_active(request):
     f.write("#SBATCH --ntasks={}\n".format(ntasks_num))
     f.write("#SBATCH --cpus-per-task={}\n".format(cpus_per_task))
     f.write("#SBATCH --mem={}gb\n".format(mem_num))
-    f.write("#SBATCH --output=/tmp/output{}.log\n".format(name))
+    f.write("#SBATCH --output=/home/minghsuan/Desktop/Job_finished/output{}.log\n".format(name))
     f.write("#SBATCH --partition=COMPUTE1Q\n")
     f.write("#SBATCH --account=root\n" )
     f.write("echo '1'\n")
     f.close()
     time.sleep(3) ## in order to prevent sending before that sbatch-file produced
     os.system(mv_file)
+    time.sleep(1)
     os.system(sbatch_file)
 
     return HttpResponseRedirect(reverse('app:index')) #The reverse var. is names of path from urls.py

@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from .models import Question, Choice
 from django.views import generic
+from django.utils import timezone
 
 #import  subprocess
 #subprocess.run(["rm","/home/minghsuan/mike.sh"])
@@ -13,7 +14,7 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_question_list'
     
     def get_queryset(self):
-        return Question.objects.order_by('-pub_date')[:5]
+            return Question.objects.filter(pub_date__lte=timezone.now())
     
     #latest_question_list = Question.objects.order_by('pub_date')[:5] 
     #In order_by can use object to reoder and add - infront can reverse the list,
@@ -25,6 +26,11 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
+    def get_queryset(self):
+        """
+        Excludes any questions that aren't published yet.
+        """
+        return Question.objects.filter(pub_date__lte=timezone.now())
     
 class ResultsView(generic.DetailView):
     model = Question
