@@ -1,8 +1,9 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 import time, os, random
 from datetime import datetime
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 # Darunter ist für Djangorestframework import library
 from .serializers import UserSerializer, JobSerializer
@@ -10,19 +11,20 @@ from rest_framework.generics import GenericAPIView
 from django.http import JsonResponse
 from django.db import transaction
 from app.models import User, Job
+import json
 
 
 def IndexView(request):
-    return render(request, 'app/index.html')
+    return render(request, 'build/index.html')
 
-def create(request):
-    return render(request, 'app/create.html')
-
+@ensure_csrf_cookie  #make front-end can get csrf token from cookies
 def create_active(request):
+    data = json.loads(request.body.decode('utf-8')) # get json lib. from frontend post
+
     #device Variable
-    mem_number =1
-    cpus_per_task =1
-    ntasks_num =8
+    mem_number = data['memory']
+    cpus_per_task = data['cpu']
+    ntasks_num = data['gpu']
     #path Variable
     user_name = 'root'
     format_datetime = "%Y%m%d%H%M%S"
@@ -52,8 +54,9 @@ def create_active(request):
     os.system(mv_file)
     time.sleep(1)
     os.system(sbatch_file)
-
-    return HttpResponseRedirect(reverse('app:index')) #The reverse var. is names of path from urls.py
+    status_web = {'status' : '200'}
+    #return HttpResponseRedirect(reverse('app:index')) #The reverse var. is names of path from urls.py
+    return JsonResponse(status_web)
 
 
 # Darunter ist für Djangorestframework Viewsclass
