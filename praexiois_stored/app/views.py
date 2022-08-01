@@ -43,11 +43,12 @@ def create_active(request):
     f.write("#SBATCH --account={}\n".format(user_name))
     f.write("echo '1'\n")
     f.close()
-    # Save data in d.b.
+    # Save data into Database.
     user_datas = User.objects.get(name = user_name)
     data_job = user_datas.job_set.create(jobid = int(name), mem_num = mem_number, cpu_core=cpus_per_task,)
     data_job.save()
-    time.sleep(3) ## in order to prevent sending before that sbatch-file produced
+    # in order to prevent sending before that sbatch-file produced
+    time.sleep(3)
     os.system(mv_file)
     time.sleep(1)
     os.system(sbatch_file)
