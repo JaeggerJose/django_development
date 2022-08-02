@@ -1,0 +1,1 @@
+Webtop_Itksnap = root.job_set.create(task_name='root_Itksnap', description='ITKsnap using Webtop to connect', image_type='Itksnap', start_time=datetime.now(), end_time=datetime.now(), during_time='00:00', predict_endtime='now', loginport_gui_webtop=4555, jobid=20220802100351, mem_num=5, cpu_core=2, gpu_num=1, status_job='shutdown')
