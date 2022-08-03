@@ -48,12 +48,12 @@ def file_write_function(data, name, user_group):
     #path Variable
     user_name = 'minghsuan'
     format_datetime = "%Y%m%d%H%M%S"
-    port = getoutput('getAvailablePort')
+    port = getoutput('sudo srun --pty getAvailablePort')
     fopen_file = '/home/minghsuan/Desktop/Job_queue/job{}.sh'.format(name)
     change_fileowner = 'chown {0} /home/minghsuan/Desktop/Job_queue/job{1}.sh'.format(user_name ,name)
     change_filegroup = 'chown :{0} /home/minghsuan/Desktop/Job_queue/job{1}.sh'.format(user_name ,name)
     change_priority = 'chmod 770 -R /home/minghsuan/Desktop/Job_queue/job{}.sh'.format(name)
-    docker_name = '{0}/{1}'.format(user_name, data['imagename'])
+    docker_name = '{0}_{1}'.format(user_name, data['imagename'])
     
     #file produce
     f = open(fopen_file,'w+')
@@ -85,7 +85,7 @@ def create_active(request):
     data = json.loads(request.body.decode('utf-8')) # get json lib. from frontend post
 
     #path Variable
-    user_group = 'root'
+    user_group = 'minghsuan'
     user_name = 'minghsuan'
     format_datetime = "%Y%m%d%H%M%S"
     name  = (datetime.now().strftime(format_datetime)) + str(random.randint(100,999))
