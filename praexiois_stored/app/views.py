@@ -51,7 +51,7 @@ def file_write_function(data, name, user_group):
     os.system('sudo sbatch /home/minghsuan/port/get_port.sh')
     time.sleep(1)
     fo = open('/home/minghsuan/port/output.port','r')
-    port = fo.read(-1)
+    port = fo.read(5)
     fo.close()
     #port = getoutput('sudo srun --pty getAvailablePort')
     fopen_file = '/home/minghsuan/Desktop/Job_queue/job{}.sh'.format(name)
