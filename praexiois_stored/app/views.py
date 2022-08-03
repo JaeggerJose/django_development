@@ -48,7 +48,12 @@ def file_write_function(data, name, user_group):
     #path Variable
     user_name = 'minghsuan'
     format_datetime = "%Y%m%d%H%M%S"
-    port = getoutput('sudo srun --pty getAvailablePort')
+    os.system('sudo sbatch /home/minghsuan/port/get_port.sh')
+    time.sleep(1)
+    fo = open('/home/minghsuan/port/output.port','r')
+    port = fo.read(-1)
+    fo.close()
+    #port = getoutput('sudo srun --pty getAvailablePort')
     fopen_file = '/home/minghsuan/Desktop/Job_queue/job{}.sh'.format(name)
     change_fileowner = 'chown {0} /home/minghsuan/Desktop/Job_queue/job{1}.sh'.format(user_name ,name)
     change_filegroup = 'chown :{0} /home/minghsuan/Desktop/Job_queue/job{1}.sh'.format(user_name ,name)
