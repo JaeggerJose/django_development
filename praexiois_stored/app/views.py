@@ -46,7 +46,7 @@ def file_write_function(data, name, user_group):
     image_types = get_image_type(data['imagename'])
     
     #path Variable
-    user_name = 'minghsuan'
+    user_name = 'root'
     format_datetime = "%Y%m%d%H%M%S"
     os.system('sudo sbatch /home/minghsuan/port/get_port.sh')
     time.sleep(1)
@@ -90,8 +90,8 @@ def create_active(request):
     data = json.loads(request.body.decode('utf-8')) # get json lib. from frontend post
 
     #path Variable
-    user_group = 'minghsuan'
-    user_name = 'minghsuan'
+    user_group = 'root'
+    user_name = 'root'
     format_datetime = "%Y%m%d%H%M%S"
     name  = (datetime.now().strftime(format_datetime)) + str(random.randint(100,999))
     mv_file = 'mv /home/minghsuan/Desktop/Job_queue/job{}.sh /home/minghsuan/Desktop/Job_finished'.format(name)
