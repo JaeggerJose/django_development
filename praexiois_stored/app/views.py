@@ -38,7 +38,7 @@ def get_image_type(imagename):
         image_types = imagename
     return image_types
 
-def file_write_function(data, name, user_group):
+def file_write_function(data, name, user_group, port):
     #device Variable
     mem_number = data['memory']
     cpus_per_task = data['cpu']
@@ -48,11 +48,7 @@ def file_write_function(data, name, user_group):
     #path Variable
     user_name = 'root'
     format_datetime = "%Y%m%d%H%M%S"
-    os.system('sudo sbatch /home/minghsuan/port/get_port.sh')
-    time.sleep(1)
-    fo = open('/home/minghsuan/port/output.port','r')
-    port = fo.read(5)
-    fo.close()
+
     #port = getoutput('sudo srun --pty getAvailablePort')
     fopen_file = '/home/minghsuan/Desktop/Job_queue/job{}.sh'.format(name)
     change_fileowner = 'chown {0} /home/minghsuan/Desktop/Job_queue/job{1}.sh'.format(user_name ,name)
@@ -88,6 +84,12 @@ def IndexView(request):
 @ensure_csrf_cookie  #make front-end can get csrf token from cookies
 def create_active(request):
     data = json.loads(request.body.decode('utf-8')) # get json lib. from frontend post
+    
+    os.system('sudo sbatch /home/minghsuan/port/get_port.sh')
+    time.sleep(1)
+    fo = open('/home/minghsuan/port/output.port','r')
+    port = fo.read(5)
+    fo.close()
 
     #path Variable
     user_group = 'root'
@@ -98,14 +100,14 @@ def create_active(request):
     sbatch_file = 'su - {0} -c "sbatch /home/minghsuan/Desktop/Job_finished/job{1}.sh"'.format(user_name, name)
 
     #file produce and execute
-    file_write_function(data, name, user_group)
+    file_write_function(data, name, user_group, port)
 
     time.sleep(1)
     os.system(mv_file)
     time.sleep(1) # in order to prevent sending before that sbatch-file produced
     os.system(sbatch_file)
 
-    status_web = {'status' : '200'}
+    status_web = {'port' : port }
     #return HttpResponseRedirect(reverse('app:index')) #The reverse var. is names of path from urls.py
     return JsonResponse(status_web)
 
