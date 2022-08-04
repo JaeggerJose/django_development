@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.csrf import ensure_csrf_cookie
-
+from django.views.decorators.csrf import csrf_exempt
 #system import
 import time, os, random, json
 from subprocess import getoutput
@@ -54,7 +54,7 @@ def file_write_function(data, name, user_group, port):
     change_fileowner = 'chown {0} /home/minghsuan/Desktop/Job_queue/job{1}.sh'.format(user_name ,name)
     change_filegroup = 'chown :{0} /home/minghsuan/Desktop/Job_queue/job{1}.sh'.format(user_name ,name)
     change_priority = 'chmod 770 -R /home/minghsuan/Desktop/Job_queue/job{}.sh'.format(name)
-    docker_name = '{0}_{1}'.format(user_name, data['imagename'], name)
+    docker_name = '{0}_{1}_{2}'.format(user_name, data['imagename'], name)
     
     #file produce
     f = open(fopen_file,'w+')
@@ -81,7 +81,7 @@ def file_write_function(data, name, user_group, port):
 def IndexView(request):
     return render(request, 'build/index.html')
 
-@ensure_csrf_cookie  #make front-end can get csrf token from cookies
+@csrf_exempt  #make front-end can get csrf token from cookies
 def create_active(request):
     data = json.loads(request.body.decode('utf-8')) # get json lib. from frontend post
     
