@@ -46,7 +46,7 @@ def file_write_function(data, name, user_group, port):
     image_types = get_image_type(data['imagename'])
     
     #path Variable
-    user_name = 'minghsuan'
+    user_name = 'root'
     format_datetime = "%Y%m%d%H%M%S"
 
     #port = getoutput('sudo srun --pty getAvailablePort')
@@ -93,7 +93,7 @@ def create_active(request):
 
     #path Variable
     user_group = 'root'
-    user_name = 'minghsuan'
+    user_name = 'root'
     format_datetime = "%Y%m%d%H%M%S"
     name  = (datetime.now().strftime(format_datetime)) + str(random.randint(100,999))
     mv_file = 'mv /home/minghsuan/Desktop/Job_queue/job{}.sh /home/minghsuan/Desktop/Job_finished'.format(name)
