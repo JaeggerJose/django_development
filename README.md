@@ -1,3 +1,25 @@
+# Installation for django Enviroment
+
+###  1. Install pip and python first
+
+`sudo apt install -y python3-pip python-is-python3`
+
+### 2. Install virtualenv using pip
+
+` pip install virtualenv `
+
+### 3. Create a virtual environment
+
+` virtualenv venv `
+
+### 4. Active your virtual environment:
+
+` source venv/bin/active `
+
+### 5. install django and other models in virtual environment: (e.g. telephone, rest_framework, markdown...etc.)
+
+`pip install django djangorestframework markdown django-filter django-phonenumber-field[phonenumbers] drf-yasg `
+
 # Django developing for Axtasy Web UI
 
 ## When you want to start up the MJS(Make Job system) you need to mkdir 2 Forlders on the path /home/minghsuan/Desktop
