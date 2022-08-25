@@ -18,7 +18,7 @@
 
 ### 5. install django and other models in virtual environment: (e.g. telephone, rest_framework, markdown...etc.)
 
-`pip install django djangorestframework markdown django-filter django-phonenumber-field[phonenumbers] drf-yasg `
+`pip install django djangorestframework markdown django-filter django-phonenumber-field[phonenumbers] drf-yasg django-cors-headers `
 
 # Django developing for Axtasy Web UI
 
