@@ -58,7 +58,7 @@ def ldap_create_user_and_group(data):
     ldap_write_user_and_group_file(data)
     name = data['name']
     file_location = '/tmp/ldap_templates/{}_user_group_creattion.ldif'.format(name)
-    #ldap_add_command = "ldapadd -cx -h 120.126.17.200:3899 -D "cn=admin,dc=ccllab,dc=edu,dc=tw" -w -f file_location"
+    ldap_add_command = 'ldapadd -cx -h 120.126.17.200:3899 -D "cn=admin,dc=ccllab,dc=edu,dc=tw" -w -f file_location'
     return 0
 
 def save_user_information_into_database(data):
