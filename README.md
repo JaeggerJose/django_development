@@ -28,3 +28,7 @@
 - React read CSRF token from cookie https://www.learnfk.com/question/reactjs/50732815.html
 - Django read json from React https://stackoverflow.com/questions/6541767/python-urllib-error-attributeerror-bytes-object-has-no-attribute-read
 - (Django login page) [https://learndjango.com/tutorials/django-login-and-logout-tutorial]
+
+## Tipps
+
+- Kann durch `request.user` zu nehmen das Information, wer dies Website request sendt.
