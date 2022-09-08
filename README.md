@@ -31,4 +31,6 @@
 
 ## Tipps
 
+- get request User after login https://stackoverflow.com/questions/62580622/how-to-access-current-user-from-django-to-react
 - Kann durch `request.user` zu nehmen das Information, wer dies Website request sendt.
+- `from django.contrib.auth import authenticate` to import authenticate function and use `authenticate` with `username` and `password` to authenticate, which user is using now.
